@@ -188,7 +188,7 @@ function ObesityLikelihood() {
                 </div>
 
                 <button className="px-5 py-1 bg-blue-500 text-white rounded-full hover:bg-blue-800 transition-colors" onClick={computeOutcome}>
-                    Run predictor
+                    Run model
                 </button>
             </div>
         </div>

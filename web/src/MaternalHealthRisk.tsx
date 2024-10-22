@@ -110,8 +110,8 @@ function MaternalHealthRisk() {
                     <input type="number" className="px-5 py-1 border rounded-full" value={store.restingHeartRate} onChange={(event) => store.update({ restingHeartRate: parseInt(event.currentTarget.value) })} />
                 </div>
 
-                <button className="px-5 py-1 bg-blue-500 text-white rounded-full hover:bg-blue-800 transition-colors" onClick={computeOutcome}>
-                    Run predictor
+                <button className="px-5 py-1 bg-green-500 text-white rounded-full hover:bg-green-800 transition-colors" onClick={computeOutcome}>
+                    Run model
                 </button>
             </div>
         </div>

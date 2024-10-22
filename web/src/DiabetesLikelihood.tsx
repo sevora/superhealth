@@ -188,8 +188,8 @@ function DiabetesLikelihood() {
                     </select>
                 </div>
                 
-                <button className="px-5 py-1 bg-blue-500 text-white rounded-full hover:bg-blue-800 transition-colors" onClick={computeOutcome}>
-                    Run predictor
+                <button className="px-5 py-1 bg-yellow-600 text-white rounded-full hover:bg-yellow-700 transition-colors" onClick={computeOutcome}>
+                    Run model
                 </button>
             </div>
         </div>

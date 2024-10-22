@@ -88,8 +88,8 @@ function HeartDiseaseRisk() {
                     <input type="number" className="px-5 py-1 border rounded-full" value={store.maximumHeartRate} onChange={(event) => store.update({ maximumHeartRate: parseInt(event.currentTarget.value) })} />
                 </div>
 
-                <button className="px-5 py-1 bg-blue-500 text-white rounded-full hover:bg-blue-800 transition-colors" onClick={computeOutcome}>
-                    Run predictor
+                <button className="px-5 py-1 bg-red-500 text-white rounded-full hover:bg-red-800 transition-colors" onClick={computeOutcome}>
+                    Run model
                 </button>
             </div>
         </div>
