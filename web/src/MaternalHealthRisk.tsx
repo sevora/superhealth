@@ -75,9 +75,12 @@ function MaternalHealthRisk() {
                                         <li>checking your medication and intake to ensure that it doesn't affect the baby</li>
                                     </ul>
                                 </div>
-                                
                             }
                         </div>
+                        
+                        <button className="px-5 mt-3 py-1 text-white bg-purple-500 rounded-full hover:bg-purple-700 transition-colors" onClick={() => setResults(null)}>
+                            Clear Results
+                        </button>
                     </div>
                 }
                 <div className="flex flex-col gap-1">
@@ -110,7 +113,7 @@ function MaternalHealthRisk() {
                     <input type="number" className="px-5 py-1 border rounded-full" value={store.restingHeartRate} onChange={(event) => store.update({ restingHeartRate: parseInt(event.currentTarget.value) })} />
                 </div>
 
-                <button className="px-5 py-1 bg-green-500 text-white rounded-full hover:bg-green-800 transition-colors" onClick={computeOutcome}>
+                <button className="px-5 py-1 mb-2 bg-green-500 text-white rounded-full hover:bg-green-800 transition-colors" onClick={computeOutcome}>
                     Run model
                 </button>
             </div>

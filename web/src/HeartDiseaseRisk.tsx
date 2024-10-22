@@ -66,6 +66,10 @@ function HeartDiseaseRisk() {
                                     </div>
                             }
                         </div>
+
+                        <button className="px-5 mt-3 py-1 text-white bg-purple-500 rounded-full hover:bg-purple-700 transition-colors" onClick={() => setResults(null)}>
+                            Clear Results
+                        </button>
                     </div>
                 }
                 <div className="flex flex-col gap-1">
@@ -88,7 +92,7 @@ function HeartDiseaseRisk() {
                     <input type="number" className="px-5 py-1 border rounded-full" value={store.maximumHeartRate} onChange={(event) => store.update({ maximumHeartRate: parseInt(event.currentTarget.value) })} />
                 </div>
 
-                <button className="px-5 py-1 bg-red-500 text-white rounded-full hover:bg-red-800 transition-colors" onClick={computeOutcome}>
+                <button className="px-5 py-1 mb-2 bg-red-500 text-white rounded-full hover:bg-red-800 transition-colors" onClick={computeOutcome}>
                     Run model
                 </button>
             </div>

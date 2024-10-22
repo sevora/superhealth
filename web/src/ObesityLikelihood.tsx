@@ -127,6 +127,10 @@ function ObesityLikelihood() {
                                </div>
                             }
                         </div>
+
+                        <button className="px-5 mt-3 py-1 text-white bg-purple-500 rounded-full hover:bg-purple-700 transition-colors" onClick={() => setResults(null)}>
+                            Clear Results
+                        </button>
                     </div>
                 }
                 <div className="flex flex-col gap-1">
@@ -187,7 +191,7 @@ function ObesityLikelihood() {
                     </select>
                 </div>
 
-                <button className="px-5 py-1 bg-blue-500 text-white rounded-full hover:bg-blue-800 transition-colors" onClick={computeOutcome}>
+                <button className="px-5 py-1 mb-2 bg-blue-500 text-white rounded-full hover:bg-blue-800 transition-colors" onClick={computeOutcome}>
                     Run model
                 </button>
             </div>
