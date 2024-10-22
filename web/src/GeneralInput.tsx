@@ -13,6 +13,14 @@ function GeneralInput() {
                 </div>
 
                 <div className="flex flex-col gap-1">
+                    <div>Sex</div>
+                    <select className="px-5 py-1 border rounded-full" value={store.sex} onChange={event => store.update({ sex: event.currentTarget.value as any })}>    
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </div>
+
+                <div className="flex flex-col gap-1">
                   <div>Height (in meters)</div>
                     <input type="number" step=".01" className="px-5 py-1 border rounded-full" value={store.height} onChange={(event) => store.update({ height: parseFloat(event.currentTarget.value) })} />
                 </div>

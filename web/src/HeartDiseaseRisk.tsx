@@ -31,7 +31,7 @@ function HeartDiseaseRisk() {
                 Heart Disease Prediction
             </div>
 
-            <div className={`flex flex-col gap-3 px-3 overflow-hidden transition-[max-height] duration-300 ${open ? 'max-h-[600px]' : 'max-h-0'}`}>
+            <div className={`flex flex-col gap-3 px-3 overflow-hidden transition-[max-height] duration-300 ${open ? 'max-h-[9999px]' : 'max-h-0'}`}>
                 {results &&
                     <div className="my-2 p-3 border rounded-md">
                         <div className="text-lg font-medium">Results</div>
@@ -40,10 +40,11 @@ function HeartDiseaseRisk() {
                         <div>Verdict: {outputClasses[outputClassIndex]}</div>
                         <div>
                             <div className="font-semibold">Recommendations:</div>
+                            <a className="text-blue-600" href="https://www.healthline.com/health/healthy-heart-tips" target='_blank'>Source</a>
                             {
                                 outputClassIndex === 0 ?
                                     <div>
-                                        The model predicts the absence of the possibility of heart disease. It is recommended that you maintain:
+                                        The model predicts the absence of the possibility of heart disease. It is recommended that you maintain your health:
                                         <ul className="list-disc px-5">
                                             <li>by having a healthy diet</li>
                                             <li>getting enough sleep</li>
@@ -53,7 +54,15 @@ function HeartDiseaseRisk() {
                                     </div>
                                     :
                                     <div>
-
+                                        The model predicts the presence of the possibility of heart disease. It is recommended that you improve your lifestyle:
+                                        <ul className="list-disc px-5">
+                                            <li>by having a healthy diet and eating nutritious breakfast every day can help you maintain a healthy diet and weight</li>
+                                            <li>getting enough sleep</li>
+                                            <li>managing stress</li>
+                                            <li>cutting on salt intake</li>
+                                            <li>reducing the saturated fat intake</li>
+                                            <li>controlling your cholesterol, and blood pressure</li>
+                                        </ul>
                                     </div>
                             }
                         </div>
