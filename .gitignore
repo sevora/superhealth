@@ -1,3 +1,5 @@
+always_copy_to_deps
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
