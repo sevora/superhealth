@@ -133,7 +133,7 @@ function DiabetesLikelihood() {
                     {/* Question: General Health Evaluation */}
                     <div className="flex flex-col gap-1">
                         <div>From a scale of 1-5, how would you rate your health?</div>
-                        <input type="number" className="px-5 py-1 border rounded-full" value={store.generalHealthEvaluation} onChange={(event) => store.update({ generalHealthEvaluation: Math.min(Math.max(1, parseInt(event.currentTarget.value) || 0), 5) })} />
+                        <input type="number" className="px-5 py-1 border rounded-full" value={store.generalHealthEvaluation} onChange={(event) => store.update({ generalHealthEvaluation: Math.min(Math.max(1, parseInt(event.currentTarget.value[1]) || 1), 5) })} />
                     </div>
 
                     {/* Question: Mental Health Decline */}
