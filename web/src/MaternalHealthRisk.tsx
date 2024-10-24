@@ -107,37 +107,37 @@ function MaternalHealthRisk() {
                     {/* Question: Age */}
                     <div className="flex flex-col gap-1">
                         <div>Age</div>
-                        <input type="number" className="px-5 py-1 border rounded-full" value={store.age} onChange={(event) => store.update({ age: Math.max(parseInt(event.currentTarget.value) || 1, 1) }) }/>
+                        <input type="number" className="px-5 py-1 border rounded-full" value={store.age} onChange={(event) => store.update({ age: Math.max(parseInt(event.currentTarget.value) || 0, 1) }) }/>
                     </div>
 
                     {/* Question: Systolic Blood Pressure */}
                     <div className="flex flex-col gap-1">
                         <div>Systolic Blood Pressure (in mmHg)</div>
-                        <input type="number" className="px-5 py-1 border rounded-full" value={store.systolicBloodPressure} onChange={(event) => store.update({ systolicBloodPressure: Math.max(parseInt(event.currentTarget.value) || 1, 1) })} />
+                        <input type="number" className="px-5 py-1 border rounded-full" value={store.systolicBloodPressure} onChange={(event) => store.update({ systolicBloodPressure: Math.max(parseInt(event.currentTarget.value) || 0, 1) })} />
                     </div>
                     
                     {/* Question: Diastolic Blood Pressure */}
                     <div className="flex flex-col gap-1">
                         <div>Diastolic Blood Pressure  (in mmHg)</div>
-                        <input type="number" className="px-5 py-1 border rounded-full" value={store.diastolicBloodPressure} onChange={(event) => store.update({ diastolicBloodPressure: Math.max(parseInt(event.currentTarget.value) || 1, 1) })} />
+                        <input type="number" className="px-5 py-1 border rounded-full" value={store.diastolicBloodPressure} onChange={(event) => store.update({ diastolicBloodPressure: Math.max(parseInt(event.currentTarget.value) || 0, 1) })} />
                     </div>
 
                     {/* Question: Blood Glucose Level */}
                     <div className="flex flex-col gap-1">
                         <div>Blood Glucose Level (mg/dL)</div>
-                        <input type="number" step=".01" className="px-5 py-1 border rounded-full" value={store.bloodGlucoseLevel} onChange={(event) => store.update({ bloodGlucoseLevel: Math.max(parseFloat(event.currentTarget.value) || 1, 1) })} />
+                        <input type="number" step=".01" className="px-5 py-1 border rounded-full" value={store.bloodGlucoseLevel} onChange={(event) => store.update({ bloodGlucoseLevel: Math.max(parseFloat(event.currentTarget.value) || 0, 1) })} />
                     </div>
 
                     {/* Question: Body Temperature */}
                     <div className="flex flex-col gap-1">
                         <div>Body Temperature (Farenheit)</div>
-                        <input type="number" className="px-5 py-1 border rounded-full" value={store.bodyTemperature} onChange={(event) => store.update({ bodyTemperature: parseInt(event.currentTarget.value) || 1 })} />
+                        <input type="number" className="px-5 py-1 border rounded-full" value={store.bodyTemperature} onChange={(event) => store.update({ bodyTemperature: parseInt(event.currentTarget.value) || 0 })} />
                     </div>
 
                     {/* Question: Resting Heart Rate */}
                     <div className="flex flex-col gap-1">
                         <div>Resting Heart Rate (bpm)</div>
-                        <input type="number" className="px-5 py-1 border rounded-full" value={store.restingHeartRate} onChange={(event) => store.update({ restingHeartRate: Math.max(parseInt(event.currentTarget.value) || 1, 1) })} />
+                        <input type="number" className="px-5 py-1 border rounded-full" value={store.restingHeartRate} onChange={(event) => store.update({ restingHeartRate: Math.max(parseInt(event.currentTarget.value) || 0, 1) })} />
                     </div>
 
                     <button className="px-5 py-1 mb-2 mt-2 bg-green-500 text-white rounded-full hover:bg-green-800 transition-colors" onClick={computeOutcome}>
