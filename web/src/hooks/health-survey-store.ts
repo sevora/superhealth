@@ -2,48 +2,50 @@ import { create } from 'zustand';
 
 export interface HealthSurveyStore {
     /**
-     * in years
+     * The age (in Earth years) of the user.
      */
     age: number,
 
     /**
-     * In meters
+     * The height (in meters) of the user.
      */
     height: number,
 
     /**
-     * in kilograms
+     * The weight (in kilograms) in Earth.
      */
     weight: number,
 
+    /**
+     * The biological sex whether male or female.
+     */
     sex: "male" | "female",
     
     /**
-     * (in mmHg)
-     * 
+     * The blood pressure (in mmHg) when heart pumps blood.
      * High blood pressure if greater than or equal to 130.
      */
     systolicBloodPressure: number,
     
     /**
-     * or restingBloodPressure (in mmHg)
-     * 
+     * The blood pressure (in mmHg) when heart rests between beats.
      * High blood pressure if greater than or equal to 80
      */
     diastolicBloodPressure: number,
 
     /**
-     * (in mmHg)
+     * Resting blood pressure (in mmHg) thought to be the same
+     * as diastolic but we separate it just in case.
      */
     restingBloodPressure: number,
 
     /**
-     * in bpm
+     * This is the resting heart rate (in bpm).
      */
     restingHeartRate: number,
 
     /**
-     * in bpm, this refers to maximum achieved
+     * This refers to maximum heart rate (in bpm) achieved throughout lifetime.
      */
     maximumHeartRate: number,
 
@@ -53,57 +55,107 @@ export interface HealthSurveyStore {
      */
     cholesterol: number,
 
+    /**
+     * Whether they have had their cholesterol 
+     * checked in the past 5 years
+     */
+    hasCholesterolChecked: boolean,
+
+    /**
+     * Tells whether there is exercised induced angina.
+     */
     hasExercisedInducedAngena: boolean,
     
+    /**
+     * Details what kind of chest pain that 
+     * is experienced.
+     */
     chestPainType: "typical angina" | "atypical angina" | "non-anginal" | "asymptomatic",
 
     /**
-     * This is in mg/dL, unit equivalence (1mg/dL = 1/18 mmol/L) 
+     * Blood glucose level (in mg/dL), unit equivalence (1mg/dL = 1/18 mmol/L) 
      * fastingBloodSugar is true if (>120mg/dL)
      */
     bloodGlucoseLevel: number,
     
     /**
-     * in fahrenheit degrees
+     * Recent body temperature (in fahrenheit degrees) taken.
      */
     bodyTemperature: number,  
 
+    /**
+     * Whether there is a history of being overweight
+     * running in the family.
+     */
     hasFamilyHistoryOverweight: boolean,
 
     /**
-     * This is abbreviated as FAVC
+     * In the models, this is abbreviated as FAVC.
+     * Whether frequents eating high calorie food.
      */
     frequentHighCalorieFood: boolean,
 
     /**
-     * This is abbreviated as SCC
+     * In the models, this is abbreviated as SCC.
+     * Whether one monitors their calories.
      */
     hasMonitorCalories: boolean,
 
     /**
-     * This is abbreviated as CAEC,
-     * True means always, false means sometimes
+     * In the models, this is abbreviated as CAEC.
+     * Whether frequently eating between meals.
+     * True means always, false means sometimes.
      */
     frequentEatBetweenMeals: boolean,
 
+    /**
+     * In the models, this is abbreviated as SMOKE.
+     * Whether frequently smokes or not.
+     */
     frequentSmoke: boolean,
 
     /**
-     * Abbreviated as CALC,
-     * If true consider as "always", if false consider as "sometimes"
+     * In the models, this is abbreviated as CALC.
+     * Whether frequently drinking alcohol.
+     * True means always, false means sometimes.
      */
     frequentDrinkAlcohol: boolean,
 
+    /**
+     * This is the usual transportation taken
+     * from a set of given choices.
+     */
     usualTransportation: "public" | "walking" | "car" | "motorcycle" | "bicycle",
 
+    /**
+     * Whether there has been an experience 
+     * of stroke or not.
+     */
     hasHadStroke: boolean,
 
+    /**
+     * Whether there is a heart 
+     * disease or not.
+     */
     hasHeartDisease: boolean,
 
+    /**
+     * Whether one frequently (daily/almost daily) 
+     * does physical activity.
+     */
     frequentPhysicalActivity: boolean,
 
+    /**
+     * Whether one eats fruits frequently
+     * (daily to almost daily) eating.
+     */
     frequentEatFruits: boolean,
 
+    
+    /**
+     * Whether one eats fruits frequently
+     * (daily to almost daily) eating.
+     */
     frequentEatVegetables: boolean,
 
     /**
@@ -134,9 +186,16 @@ export interface HealthSurveyStore {
      */
     hasDifficultyClimbing: boolean,
 
+    /**
+     * Use this to update the store.
+     */
     update: (values: Partial<HealthSurveyStore>) => void;
 }
 
+/**
+ * As you can see the store is initialized with 
+ * default values.
+ */
 const useHealthSurveyStore = create<HealthSurveyStore>()(set => ({
     age: 18,
     weight: 58,
@@ -148,6 +207,7 @@ const useHealthSurveyStore = create<HealthSurveyStore>()(set => ({
     restingHeartRate: 80,
     maximumHeartRate: 120,
     cholesterol: 70,
+    hasCholesterolChecked: true,
     hasExercisedInducedAngena: false,
     chestPainType: "asymptomatic",
     bloodGlucoseLevel: 100,
@@ -169,10 +229,7 @@ const useHealthSurveyStore = create<HealthSurveyStore>()(set => ({
     mentalHealthMonthDecline: 0,
     physicalHealthMonthDecline: 0,
     hasDifficultyClimbing: false,
-
-    update(values) {
-        set(values);
-    },
+    update(values) { set(values) },
 }));
 
 export default useHealthSurveyStore;

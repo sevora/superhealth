@@ -1,10 +1,13 @@
 import { useState } from 'react';
 import { convertToMaternalHealthRiskModelInput } from './utilities/model-input-conversion';
+import { indexOfMax } from './utilities/indexer';
 
 import ort from 'onnxruntime-web/wasm';
 import useHealthSurveyStore from './hooks/health-survey-store';
-import { indexOfMax } from './utilities/indexer';
 
+/**
+ * This is the maternal health risk component.
+ */
 function MaternalHealthRisk() {
     const store = useHealthSurveyStore();
     const [open, setOpen] = useState<boolean>(false);
@@ -17,9 +20,13 @@ function MaternalHealthRisk() {
         const session = await ort.InferenceSession.create('/onnx/maternal_health_risk_model.onnx', { executionProviders: ['wasm'] });
         const input = new ort.Tensor('float32', Float32Array.from(convertToMaternalHealthRiskModelInput(store)));
         const output = await session.run({ [session.inputNames[0]]: input });
+
+        /**
+         * The results shape and meaning can also be found in the notebook.
+         * In this case it is: high risk, low risk, and medium risk during maternity.
+         */
         const results = Object.values(Object.values(output)[0].data) as [number, number, number];
 
-        // RiskLevel_high risk,  RiskLevel_low risk,  RiskLevel_mid risk
         setResults([
             Math.max(0, results[0] * 100),
             Math.max(0, results[1] * 100),
@@ -33,7 +40,7 @@ function MaternalHealthRisk() {
                 Maternal Health Risk
             </div>
 
-            <div className={`flex flex-col gap-3 px-3 overflow-hidden transition-[max-height] duration-300 ${open ? 'max-h-[9999px]' : 'max-h-0'}`}>
+            <div className={`flex flex-col gap-3 px-3 overflow-hidden ${open ? 'block' : 'hidden'}`}>
                 {results &&
                     <div className="my-2 p-3 border rounded-md">
                         <div className="text-lg font-medium">Results</div>
@@ -43,7 +50,6 @@ function MaternalHealthRisk() {
                         <div>Verdict: {outputClasses[outputClassIndex]}</div>
                         <div>
                             <div className="font-medium">Recommendations:</div>
-                            <a className="text-blue-600" href="https://www.signatureperinatal.com/blog/7-tips-for-managing-a-high-risk-pregnancy" target='_blank'>Source</a>   
                             {
                                 outputClassIndex === 0 ?
                                     <div>
@@ -53,6 +59,7 @@ function MaternalHealthRisk() {
                                             <li>managing one's mindset may help through this likely difficult process</li>
                                             <li>ensure that you always listen to your body</li>
                                         </ul>
+                                        <a className="text-blue-600" href="https://www.signatureperinatal.com/blog/7-tips-for-managing-a-high-risk-pregnancy" target='_blank'>Source</a>   
                                     </div>
                                     :
                                 outputClassIndex === 1 ?
@@ -64,6 +71,7 @@ function MaternalHealthRisk() {
                                         <li>checking your medication and intake to ensure that it doesn't affect the baby</li>
                                         <li>drinking more water helps in maintaining the health</li>
                                     </ul>
+                                    <a href="https://www.ultalabtests.com/blog/pregnancy-and-fertility/healthy-pregnancy-key-steps-to-ensure-a-healthy-pregnancy/" target='_blank'>Source</a>
                                 </div>
                                     :
                                 <div>
@@ -74,6 +82,7 @@ function MaternalHealthRisk() {
                                         <li>eliminating toxins such as alcohols and cigarettes</li>
                                         <li>checking your medication and intake to ensure that it doesn't affect the baby</li>
                                     </ul>
+                                    <a className="text-blue-600" href="https://www.signatureperinatal.com/blog/7-tips-for-managing-a-high-risk-pregnancy" target='_blank'>Source</a>   
                                 </div>
                             }
                         </div>
@@ -83,34 +92,41 @@ function MaternalHealthRisk() {
                         </button>
                     </div>
                 }
+
+                {/* Question: Age */}
                 <div className="flex flex-col gap-1">
                     <div>Age</div>
-                    <input type="number" className="px-5 py-1 border rounded-full" value={store.age} onChange={(event) => store.update({ age: parseInt(event.currentTarget.value) })} />
+                    <input type="number" className="px-5 py-1 border rounded-full" value={store.age} onChange={(event) => store.update({ age: Math.max(parseInt(event.currentTarget.value) || 1, 1) }) }/>
                 </div>
 
+                {/* Question: Systolic Blood Pressure */}
                 <div className="flex flex-col gap-1">
                     <div>Systolic Blood Pressure (in mmHg)</div>
-                    <input type="number" className="px-5 py-1 border rounded-full" value={store.systolicBloodPressure} onChange={(event) => store.update({ systolicBloodPressure: parseInt(event.currentTarget.value) })} />
+                    <input type="number" className="px-5 py-1 border rounded-full" value={store.systolicBloodPressure} onChange={(event) => store.update({ systolicBloodPressure: Math.max(parseInt(event.currentTarget.value) || 1, 1) })} />
                 </div>
-
+                
+                {/* Question: Diastolic Blood Pressure */}
                 <div className="flex flex-col gap-1">
                     <div>Diastolic Blood Pressure  (in mmHg)</div>
-                    <input type="number" className="px-5 py-1 border rounded-full" value={store.diastolicBloodPressure} onChange={(event) => store.update({ diastolicBloodPressure: parseInt(event.currentTarget.value) })} />
+                    <input type="number" className="px-5 py-1 border rounded-full" value={store.diastolicBloodPressure} onChange={(event) => store.update({ diastolicBloodPressure: Math.max(parseInt(event.currentTarget.value) || 1, 1) })} />
                 </div>
 
+                {/* Question: Blood Glucose Level */}
                 <div className="flex flex-col gap-1">
                     <div>Blood Glucose Level (mg/dL)</div>
-                    <input type="number" className="px-5 py-1 border rounded-full" value={store.bloodGlucoseLevel} onChange={(event) => store.update({ bloodGlucoseLevel: parseFloat(event.currentTarget.value) })} />
+                    <input type="number" step=".01" className="px-5 py-1 border rounded-full" value={store.bloodGlucoseLevel} onChange={(event) => store.update({ bloodGlucoseLevel: Math.max(parseFloat(event.currentTarget.value) || 1, 1) })} />
                 </div>
 
+                {/* Question: Body Temperature */}
                 <div className="flex flex-col gap-1">
                     <div>Body Temperature (Farenheit)</div>
-                    <input type="number" className="px-5 py-1 border rounded-full" value={store.bodyTemperature} onChange={(event) => store.update({ bodyTemperature: parseInt(event.currentTarget.value) })} />
+                    <input type="number" className="px-5 py-1 border rounded-full" value={store.bodyTemperature} onChange={(event) => store.update({ bodyTemperature: parseInt(event.currentTarget.value) || 1 })} />
                 </div>
 
+                {/* Question: Resting Heart Rate */}
                 <div className="flex flex-col gap-1">
                     <div>Resting Heart Rate (bpm)</div>
-                    <input type="number" className="px-5 py-1 border rounded-full" value={store.restingHeartRate} onChange={(event) => store.update({ restingHeartRate: parseInt(event.currentTarget.value) })} />
+                    <input type="number" className="px-5 py-1 border rounded-full" value={store.restingHeartRate} onChange={(event) => store.update({ restingHeartRate: Math.max(parseInt(event.currentTarget.value) || 1, 1) })} />
                 </div>
 
                 <button className="px-5 py-1 mb-2 bg-green-500 text-white rounded-full hover:bg-green-800 transition-colors" onClick={computeOutcome}>

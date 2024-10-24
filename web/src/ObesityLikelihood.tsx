@@ -17,6 +17,11 @@ function ObesityLikelihood() {
         const session = await ort.InferenceSession.create('/onnx/obesity_likelihood_model.onnx', { executionProviders: ['wasm'] });
         const input = new ort.Tensor('float32', Float32Array.from(convertToObesityLikelihoodModelInput(store)));
         const output = await session.run({ [session.inputNames[0]]: input });
+        
+        /**
+         * The results shape and meaning can also be found in the notebook.
+         * In this case it is: underweight, normal weight, obesity I, obesity II, obesity III, overweight I, and overweight II.
+         */
         const results = Object.values(Object.values(output)[0].data) as [number, number, number, number, number, number, number];
     
         setResults([
@@ -36,7 +41,7 @@ function ObesityLikelihood() {
                 Obesity Likelihood Predictor
             </div>
 
-            <div className={`flex flex-col gap-3 px-3 overflow-hidden transition-[max-height] duration-300 ${open ? 'max-h-[9999px]' : 'max-h-0'}`}>
+            <div className={`flex flex-col gap-3 px-3 overflow-hidden ${open ? 'block' : 'hidden'}}`}>
                 {results &&
                     <div className="my-2 p-3 border rounded-md">
                         <div className="text-lg font-medium">Results</div>
@@ -50,7 +55,6 @@ function ObesityLikelihood() {
                         <div>Verdict: {outputClasses[outputClassIndex]}</div>
                         <div>
                             <div className="font-semibold">Recommendations:</div>
-                            <a className="text-blue-600" href="https://www.verywellhealth.com/obesity-prevention-4014175" target='_blank'>Source</a>
                             {
                                 outputClassIndex === 0 ?
                                     <div>
@@ -59,7 +63,9 @@ function ObesityLikelihood() {
                                            <li>it is recommended to maintain a normal weight range</li>
                                            <li>engage more in physical exercise</li>
                                            <li>have a healthy and balanced diet</li>
+                                           <li>boost your calories and add healthy fats</li>
                                         </ul>
+                                        <a className="text-blue-600" href="https://www.eatthis.com/how-to-gain-weight-if-underweight/" target='_blank'>Source</a>
                                     </div>
                                     :
                                 outputClassIndex === 1 ?
@@ -67,9 +73,10 @@ function ObesityLikelihood() {
                                         The model predicts that you likely will be normal weight:
                                         <ul className="list-disc px-5">
                                             <li>it is recommended to maintain a normal weight range</li>
-                                            <li>engage more in physical exercise</li>
-                                            <li>have a healthy and balanced diet</li>
+                                            <li>continue engaging in physical exercise</li>
+                                            <li>continue having a healthy and balanced diet</li>
                                         </ul>
+                                        <a className="text-blue-600" href="https://www.eatthis.com/how-to-gain-weight-if-underweight/" target='_blank'>Source</a>
                                     </div>
                                     :
                                 outputClassIndex === 2 ?
@@ -81,6 +88,7 @@ function ObesityLikelihood() {
                                         <li>limit your sugar intake</li>
                                         <li>reduce saturated fat intake</li>
                                     </ul>
+                                    <a className="text-blue-600" href="https://www.verywellhealth.com/obesity-prevention-4014175" target='_blank'>Source</a>
                                 </div>
                                   :
                                   outputClassIndex === 3 ?
@@ -92,6 +100,7 @@ function ObesityLikelihood() {
                                         <li>limit your sugar intake</li>
                                         <li>reduce saturated fat intake</li>
                                     </ul>
+                                    <a className="text-blue-600" href="https://www.verywellhealth.com/obesity-prevention-4014175" target='_blank'>Source</a>
                                 </div>
                                   :
                                   outputClassIndex === 4 ?
@@ -103,6 +112,7 @@ function ObesityLikelihood() {
                                         <li>limit your sugar intake</li>
                                         <li>reduce saturated fat intake</li>
                                     </ul>
+                                    <a className="text-blue-600" href="https://www.verywellhealth.com/obesity-prevention-4014175" target='_blank'>Source</a>
                                 </div>
                                  :
                                  outputClassIndex === 5 ?
@@ -114,6 +124,7 @@ function ObesityLikelihood() {
                                         <li>limit your sugar intake</li>
                                         <li>reduce saturated fat intake</li>
                                     </ul>
+                                    <a className="text-blue-600" href="https://www.verywellhealth.com/obesity-prevention-4014175" target='_blank'>Source</a>
                                </div>
                                :
                                <div>
@@ -124,6 +135,7 @@ function ObesityLikelihood() {
                                         <li>limit your sugar intake</li>
                                         <li>reduce saturated fat intake</li>
                                     </ul>
+                                    <a className="text-blue-600" href="https://www.verywellhealth.com/obesity-prevention-4014175" target='_blank'>Source</a>
                                </div>
                             }
                         </div>
@@ -133,6 +145,7 @@ function ObesityLikelihood() {
                         </button>
                     </div>
                 }
+                {/* Question: Sex */}
                 <div className="flex flex-col gap-1">
                     <div>Sex</div>
                     <select className="px-5 py-1 border rounded-full" value={store.sex} onChange={event => store.update({ sex: event.currentTarget.value as any })}>    
@@ -141,6 +154,7 @@ function ObesityLikelihood() {
                     </select>
                 </div>
                 
+                {/* Question: History Overweight */}
                 <div className="flex flex-col gap-1">
                     <div>Does your family have a history of being overweight?</div>
                     <select className="px-5 py-1 border rounded-full" value={store.hasFamilyHistoryOverweight ? 1 : 0} onChange={event => store.update({ hasFamilyHistoryOverweight: !!parseInt(event.currentTarget.value) })}>    
@@ -149,6 +163,7 @@ function ObesityLikelihood() {
                     </select>
                 </div>
 
+                {/* Question: High Calorie Food */}
                 <div className="flex flex-col gap-1">
                     <div>Do you frequently eat high calorie food?</div>
                     <select className="px-5 py-1 border rounded-full" value={store.frequentHighCalorieFood ? 1 : 0} onChange={event => store.update({ frequentHighCalorieFood: !!parseInt(event.currentTarget.value) })}>    
@@ -157,6 +172,7 @@ function ObesityLikelihood() {
                     </select>
                 </div>
 
+                {/* Question: Eat Between Meals */}
                 <div className="flex flex-col gap-1">
                     <div>Do you frequently eat between meals?</div>
                     <select className="px-5 py-1 border rounded-full" value={store.frequentEatBetweenMeals ? 1 : 0} onChange={event => store.update({ frequentEatBetweenMeals: !!parseInt(event.currentTarget.value) })}>    
@@ -165,6 +181,7 @@ function ObesityLikelihood() {
                     </select>
                 </div>
 
+                {/* Question: Monitor High Calorie */}
                 <div className="flex flex-col gap-1">
                     <div>Do you monitor your calories?</div>
                     <select className="px-5 py-1 border rounded-full" value={store.hasMonitorCalories ? 1 : 0} onChange={event => store.update({ hasMonitorCalories: !!parseInt(event.currentTarget.value) })}>    
@@ -173,14 +190,16 @@ function ObesityLikelihood() {
                     </select>
                 </div>
 
+                {/* Question: Alcohol */}
                 <div className="flex flex-col gap-1">
                     <div>Do you frequently drink alcohol?</div>
-                    <select className="px-5 py-1 border rounded-full" value={store.frequentDrinkAlcohol ? 1 : 0} onChange={event => store.update({ frequentDrinkAlcohol: !!parseInt(event.currentTarget.value) })}>    
+                    <select className="px-5 py-1 border rounded-full" value={store.frequentDrinkAlcohol ? 1 : 0} onChange={event => store.update({ frequentDrinkAlcohol: !!parseInt(event.currentTarget.value) })}>
                         <option value={1}>Yes</option>
                         <option value={0}>No</option>
                     </select>
                 </div>
-                
+
+                {/* Question: Transportation */}
                 <div className="flex flex-col gap-1">
                     <div>What is your usual mode of transportation?</div>
                     <select className="px-5 py-1 border rounded-full" value={store.usualTransportation} onChange={event => store.update({ usualTransportation: event.currentTarget.value as any })}>    

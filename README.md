@@ -1,66 +1,21 @@
 # Superhealth
-This project uses venv to organize dependencies on Python3.
+Multiple health-related regression neural network models trained accessible securely on the internet.
 
-## Git Bash
-source venv/Scripts/activate
+## Datasets 
+The datasets were gathered from UC Irvine Machine Learning Repository:
+- [Heart Disease](https://archive.ics.uci.edu/dataset/45/heart+disease)
+- [Maternal Health Risk](https://archive.ics.uci.edu/dataset/863/maternal+health+risk)
+- [Estimation of Obesity Levels Based On Eating Habits and Physical Condition](https://archive.ics.uci.edu/dataset/544/estimation+of+obesity+levels+based+on+eating+habits+and+physical+condition)
+- [CDC Diabetes Health Indicators](https://archive.ics.uci.edu/dataset/891/cdc+diabetes+health+indicators)
 
-## Datasets
-`heart_disease.csv` 
-age - age in years
-sex - sex (1 = male; 0 = female)
-cp - chest pain type
-        -- Value 1: typical angina
-        -- Value 2: atypical angina
-        -- Value 3: non-anginal pain
-        -- Value 4: asymptomatic
-trestbps - resting blood pressure (in mm Hg on admission to the hospital)
-chol - serum cholestoral in mg/dl
-fbs - (fasting blood sugar > 120 mg/dl)  (1 = true; 0 = false)
-thalach - maximum heart rate achieved
-exang - exercise induced angina (1 = yes; 0 = no)
-num - diagnosis of heart disease (angiographic disease status)
-        -- Value 0: < 50% diameter narrowing
-        -- Value 1: > 50% diameter narrowing
-        (in any major vessel: attributes 59 through 68 are vessels)
+## Python Setup
+This project was developed in Python3 with a virtual environment through [venv](https://docs.python.org/3/library/venv.html). You can find and install the dependencies by utilizing the `requirements.txt` provided.
 
-`maternal_health_risk.csv`
-Age	- age of user
-SystolicBP	- Upper value of Blood Pressure in mmHg
-DiastolicBP - Lower value of Blood Pressure in mmHg
-BS	- Blood glucose levels is in terms of a molar concentration (mmol/L) (1 mmol/L = 18mg/dL) 
-BodyTemp - Body Temperature
-HeartRate	-  resting heart rate
-RiskLevel - Risk Level (1=high risk, 0=low risk)
+## Model Training and Creation
+- The models were created using [PyTorch](https://pytorch.org/). There's one notebook for each model. These notebooks may be used to train or retrain the models as needed. A minimal setup was used when programming on these notebooks. Other than [PyTorch](https://pytorch.org/), the only core libraries necessary are [numpy](https://numpy.org/) and [pandas](https://pandas.pydata.org/). For model export and import, the corresponding [onnx](https://onnx.ai/) library or runtime is required.
 
-`obesity_likelihood.csv`
-Gender - Male or Female 
-Age - in years
-family_history_with_overweight - categorical if the individual has a family member who is overweight or obese (yes or no)
-FAVC - categorical yes or no eats high calorie food frequently
-CAEC - categorical frequency Do you eat any food between meals?
-SMOKE - categorical yes or no smokes  
-SCC - categorical yes or no Do you monitor the calories you eat daily?
-CALC - categorical frequency How often do you drink alcohol?
-MTRANS - categorical transportation
-NObeyesdad - Risk level categorical
+## Trained Models
+Inside the `/onnx/` directory, you will find the exported models in `.onnx` format. Please open their corresponding notebooks to see the model architecture, or open these `.onnx` files on [Netron](https://netron.app/).
 
-`diabetes_likelihood.csv`
-Diabetes_012
-Sex = 0 female, 1 male
-HighBP = 0 = no high BP 1 = high BP
-HighChol = 0 = no high cholesterol 1 = high cholesterol	
-CholCheck = 0 = no cholesterol check in 5 years 1 = yes cholesterol check in 5 years
-BMI = bmi
-Smoker = have ever smoked 100 cigarettes 0 = no 1 = yes
-Stroke = (Ever told) you had a stroke. 0 = no 1 = yes
-HeartDiseaseorAttack = coronary heart disease (CHD) or myocardial infarction (MI) 0 = no 1 = yes
-PhysActivity = physical activity in past 30 days - not including job 0 = no 1 = yes
-Fruits = Consume Fruit 1 or more times per day 0 = no 1 = yes
-Veggies	= Consume Vegetables 1 or more times per day 0 = no 1 = yes
-HvyAlcoholConsump = Heavy drinkers (adult men having more than 14 drinks per week and adult women having more than 7 drinks per week) 0 = no 1 = yes
-AnyHealthcare = Have any kind of health care coverage, including health insurance, prepaid plans such as HMO, etc. 0 = no 1 = yes
-NoDocbcCost = Was there a time in the past 12 months when you needed to see a doctor but could not because of cost? 0 = no 1 = yes
-GenHlth = Would you say that in general your health is: scale 1-5 1 = excellent 2 = very good 3 = good 4 = fair 5 = poor
-MentHlth = Now thinking about your mental health, which includes stress, depression, and problems with emotions, for how many days during the past 30 days was your mental health not good? scale 1-30 days
-PhysHlth = Now thinking about your physical health, which includes physical illness and injury, for how many days during the past 30 days was your physical health not good? scale 1-30 days
-DiffWalk = Do you have serious difficulty walking or climbing stairs? 0 = no 1 = yes
+## Web Application
+The web application has its own `/onnx/` directory which is a copy of the `/onnx` on the project root. The only requirement when hosting the web application is the ability to securely read resources. Therefore opening the web application's build files require a protocol other than the file protocol which is insecure. All model computations happen on the client-side (i.e. the device running the web application) for privacy and security. Please open the `/web/` directory for more information.
