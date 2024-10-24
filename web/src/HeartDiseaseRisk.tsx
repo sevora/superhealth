@@ -97,7 +97,7 @@ function HeartDiseaseRisk() {
                     {/* Question: Age */}
                     <div className="flex flex-col gap-1">
                         <div>Age</div>
-                        <input type="number" className="px-5 py-1 border rounded-full" value={store.age} onChange={(event) => store.update({ age: Math.max(parseInt(event.currentTarget.value) || 0, 1) }) }/>
+                        <input type="number" className="px-5 py-1 border rounded-full" value={store.age} onChange={(event) => store.update({ age: Math.max(parseInt(event.currentTarget.value) || 0, 0) }) }/>
                     </div>
                     
                     {/* Question: Sex */}
@@ -118,19 +118,19 @@ function HeartDiseaseRisk() {
                     {/* Question: Cholesterol */}
                     <div className="flex flex-col gap-1">
                         <div>Cholesterol (LDL mg/dL)</div>
-                        <input type="number" step=".01" className="px-5 py-1 border rounded-full" value={store.cholesterol} onChange={(event) => store.update({ cholesterol: Math.max(parseFloat(event.currentTarget.value) || 0, 1) })} />
+                        <input type="number" step=".01" className="px-5 py-1 border rounded-full" value={store.cholesterol} onChange={(event) => store.update({ cholesterol: Math.max(parseFloat(event.currentTarget.value) || 0, 0) })} />
                     </div>
 
                     {/* Question: Maximum Heart Rate */}
                     <div className="flex flex-col gap-1">
                         <div>Maximum Heart Rate Achieved (bpm)</div>
-                        <input type="number" className="px-5 py-1 border rounded-full" value={store.maximumHeartRate} onChange={(event) => store.update({ maximumHeartRate: Math.max(parseInt(event.currentTarget.value) || 0, 1) })} />
+                        <input type="number" className="px-5 py-1 border rounded-full" value={store.maximumHeartRate} onChange={(event) => store.update({ maximumHeartRate: Math.max(parseInt(event.currentTarget.value) || 0, 0) })} />
                     </div>
 
                     {/* Question: Blood Glucose Level */}
                     <div className="flex flex-col gap-1">
                         <div>Blood Glucose Level (mg/dL)</div>
-                        <input type="number" step=".01" className="px-5 py-1 border rounded-full" value={store.bloodGlucoseLevel} onChange={(event) => store.update({ bloodGlucoseLevel: Math.max(parseFloat(event.currentTarget.value) || 0, 1) })} />
+                        <input type="number" step=".01" className="px-5 py-1 border rounded-full" value={store.bloodGlucoseLevel} onChange={(event) => store.update({ bloodGlucoseLevel: Math.max(parseFloat(event.currentTarget.value) || 0, 0) })} />
                     </div>
 
                     {/* Question: Exercise Induced Angina */}

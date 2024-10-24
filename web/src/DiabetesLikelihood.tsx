@@ -111,14 +111,14 @@ function DiabetesLikelihood() {
                     {/* Question: Weight */}
                     <div className="flex flex-col gap-1">
                         <div>Weight (in kilorams)</div>
-                        <input type="number" step=".01" className="px-5 py-1 border rounded-full" value={store.weight} onChange={(event) => store.update({ weight: Math.max(parseFloat(event.currentTarget.value) || 0, 1) })} />
+                        <input type="number" step=".01" className="px-5 py-1 border rounded-full" value={store.weight} onChange={(event) => store.update({ weight: Math.max(parseFloat(event.currentTarget.value) || 0, 0) })} />
                     </div>
 
 
                     {/* Question: Height */}
                     <div className="flex flex-col gap-1">
                         <div>Height (in meters)</div>
-                        <input type="number" step=".01" className="px-5 py-1 border rounded-full" value={store.height} onChange={(event) => store.update({ height: Math.max(parseFloat(event.currentTarget.value) || 0, 1) })} />
+                        <input type="number" step=".01" className="px-5 py-1 border rounded-full" value={store.height} onChange={(event) => store.update({ height: Math.max(parseFloat(event.currentTarget.value) || 0, 0) })} />
                     </div>
 
                     {/* Question: Sex */}
@@ -151,19 +151,19 @@ function DiabetesLikelihood() {
                     {/* Question: Systolic Blood Pressure */}
                     <div className="flex flex-col gap-1">
                         <div>Systolic Blood Pressure (in mmHg)</div>
-                        <input type="number" className="px-5 py-1 border rounded-full" value={store.systolicBloodPressure} onChange={(event) => store.update({ systolicBloodPressure: Math.max(parseInt(event.currentTarget.value) || 0, 1) })} />
+                        <input type="number" className="px-5 py-1 border rounded-full" value={store.systolicBloodPressure} onChange={(event) => store.update({ systolicBloodPressure: Math.max(parseInt(event.currentTarget.value) || 0, 0) })} />
                     </div>
 
                     {/* Question: Diastolic Blood Pressure */}
                     <div className="flex flex-col gap-1">
                         <div>Diastolic Blood Pressure  (in mmHg)</div>
-                        <input type="number" className="px-5 py-1 border rounded-full" value={store.diastolicBloodPressure} onChange={(event) => store.update({ diastolicBloodPressure: Math.max(parseInt(event.currentTarget.value) || 0, 1) })} />
+                        <input type="number" className="px-5 py-1 border rounded-full" value={store.diastolicBloodPressure} onChange={(event) => store.update({ diastolicBloodPressure: Math.max(parseInt(event.currentTarget.value) || 0, 0) })} />
                     </div>
 
                     {/* Question: Cholesterol */}
                     <div className="flex flex-col gap-1">
                         <div>Cholesterol (LDL mg/dL)</div>
-                        <input type="number" step=".01" className="px-5 py-1 border rounded-full" value={store.cholesterol} onChange={(event) => store.update({ cholesterol: Math.max(parseFloat(event.currentTarget.value) || 0, 1) })} />
+                        <input type="number" step=".01" className="px-5 py-1 border rounded-full" value={store.cholesterol} onChange={(event) => store.update({ cholesterol: Math.max(parseFloat(event.currentTarget.value) || 0, 0) })} />
                     </div>
 
                     {/* Question: Cholesterol Check */}
