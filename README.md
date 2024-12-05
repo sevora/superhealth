@@ -1,4 +1,4 @@
-# Superhealth
+# Superhealth &middot; ![GitHub](https://img.shields.io/github/license/sevora/superhealth) ![GitHub repo size](https://img.shields.io/github/repo-size/sevora/superhealth)
 Multiple health-related regression neural network models trained accessible securely on the internet.
 
 ## Datasets 
