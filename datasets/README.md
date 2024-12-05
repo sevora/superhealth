@@ -1,0 +1,2 @@
+# Dataset Information
+These datasets have already been pre-processed and cleaned. As for the meaning of each header, it can be found inside the `fields` file. This part is particularly open to improvements by moving the content of fields properly into this README for easier viewing.
